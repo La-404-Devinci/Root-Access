@@ -20,7 +20,7 @@ jobs:
                   ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
             - name: Upload code to VM
-              run: rsync -rtz --del --progress ./ root@${{ secrets.SSH_HOST }}:/root/access
+              run: rsync -avz ./ root@${{ secrets.SSH_HOST }}:/root/access
 
             - name: SSH into VM and deploy
               uses: appleboy/ssh-action@master
