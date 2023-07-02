@@ -20,7 +20,7 @@ jobs:
                   ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
             - name: Upload code to VM
-              run: scp -r -o StrictHostKeyChecking=no ./ root@${{ secrets.SSH_HOST }}:/root/access
+              run: rsync -rtz --del --progress ./ root@${{ secrets.SSH_HOST }}:/root/access
 
             - name: SSH into VM and deploy
               uses: appleboy/ssh-action@master
@@ -30,7 +30,7 @@ jobs:
                   key: ${{ secrets.SSH_PRIVATE_KEY }}
                   script: |
                       cd /root/access
+                      screen -X -S rootaccess kill
                       npm ci
                       npm run build
-                      screen -X -S rootaccess kill
                       screen -S rootaccess -d -m npm start
