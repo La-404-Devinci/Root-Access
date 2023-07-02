@@ -7,8 +7,9 @@ on:
             - master
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+    deploy:
+        name: Deploy to 404-MOON
+        runs-on: ubuntu-22.04
 
         steps:
             - name: Checkout repository
