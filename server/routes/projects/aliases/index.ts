@@ -1,9 +1,14 @@
 import express from "express";
-
 const router = express.Router();
 
-router.get("/", require("./listAliases").default);
-router.post("/", require("./addAlias").default);
-router.delete("/:alias_id", require("./removeAlias").default);
+import listAliases from "./listAliases";
+import addAlias from "./addAlias";
+import editAliases from "./editAliases";
+import removeAlias from "./removeAlias";
+
+router.get("/", listAliases.express);
+router.post("/", addAlias.express);
+router.put("/", editAliases.express);
+router.delete("/:alias_id", removeAlias.express);
 
 export default router;

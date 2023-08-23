@@ -13,6 +13,8 @@ const Login: Component = () => {
         setError("");
     }, [handle, password]);
 
+    if (localStorage.getItem("token")) window.location.href = "/dash";
+
     const handleSubmit = async (e: Event) => {
         e.preventDefault();
         setLoading(true);
@@ -75,7 +77,7 @@ const Login: Component = () => {
 
                 <Show when={error()}>
                     <div class={styles.form__group}>
-                        <p classList={{ "text-role": true, [styles.error]: true }}>{error()}</p>
+                        <p classList={{ "text-role": true, error: true }}>{error()}</p>
                     </div>
                 </Show>
 
